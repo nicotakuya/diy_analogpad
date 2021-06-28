@@ -1,6 +1,6 @@
 # diy_analogpad
-DIY analog gamepad.
+DIY Analog Gamepad.
 Arduino to Megadrive convertor.
 
-回路図(schematics)
+schematics(Japanese).
 https://sites.google.com/site/yugenkaisyanico/diy-analogpad
