@@ -20,8 +20,8 @@
 // (8)GND  
 // (9)ACK  :port D7
 
-// A0:ch0 stick X position
-// A1:ch1 stick Y position  
+// A0:ch0 stick Y position
+// A1:ch1 stick X position  
 // A2:ch2 throttle
 
 // REQ
@@ -32,7 +32,7 @@
 // DATA   +0    +1    +2    +3    +4    +5    +6    +7    +8    +9    +10
 // D3-D0   
 // -----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+----
-//      |E*FG |ABCD |ch0H |ch1H |     |ch2H |ch0L |ch1L |     |ch2L | ?   |   
+//      |E*FG |ABCD |ch1H |ch0H |     |ch2H |ch1L |ch0L |     |ch2L | ?   |   
 //      +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
 //      <16us><34us>
 //      <  50usec  >
@@ -49,8 +49,8 @@
 
 
 // stick/throttleの向き設定
-#define REVERSE_CH0 1 //  ch.0 stick X( 0=そのまま/1=向きを逆転 )
-#define REVERSE_CH1 0 //  ch.1 stick Y( 0=そのまま/1=向きを逆転 ) 
+#define REVERSE_CH0 1 //  ch.0 stick Y( 0=そのまま/1=向きを逆転 ) 
+#define REVERSE_CH1 0 //  ch.1 stick X( 0=そのまま/1=向きを逆転 )
 #define REVERSE_CH2 0 //  ch.2 throttle ( 0=そのまま/1=向きを逆転 )
 
 #define MD_PORT PORTD // data/LH/ACK用
@@ -149,8 +149,8 @@ void adctest(void)
   int ch0,ch1,ch2;
 
   while(1){
-    ch0 = analogRead(A0);
-    ch1 = analogRead(A1);
+    ch0 = analogRead(A1);
+    ch1 = analogRead(A0);
     ch2 = analogRead(A2);
     Serial.print(ch0,HEX);
     Serial.write(' ');
@@ -237,15 +237,15 @@ void loop() {
     sendbuf[1] = temp;
 
 #if REVERSE_CH0
-    ch0 = 255-(unsigned char)(analogRead(A0) >> 2);     //反転
+    ch0 = 255-(unsigned char)(analogRead(A1) >> 2);     //反転
 #else
-    ch0 = (unsigned char)(analogRead(A0) >> 2);  //そのまま
+    ch0 = (unsigned char)(analogRead(A1) >> 2);  //そのまま
 #endif
 
 #if REVERSE_CH1
-    ch1 = 255-(unsigned char)(analogRead(A1) >> 2);     //反転
+    ch1 = 255-(unsigned char)(analogRead(A0) >> 2);     //反転
 #else
-    ch1 = (unsigned char)(analogRead(A1) >> 2);  //そのまま
+    ch1 = (unsigned char)(analogRead(A0) >> 2);  //そのまま
 #endif
    
 #if REVERSE_CH2
@@ -254,12 +254,12 @@ void loop() {
     ch2 = (unsigned char)(analogRead(A2) >> 2);  //そのまま
 #endif
 
-    sendbuf[2] = ch0 >> 4;  // CH0 H
-    sendbuf[3] = ch1 >> 4;  // CH1 H
+    sendbuf[2] = ch1 >> 4;  // CH1 H
+    sendbuf[3] = ch0 >> 4;  // CH0 H
     sendbuf[4] = 0;
     sendbuf[5] = ch2 >> 4;  // CH2 H
-    sendbuf[6] = ch0 & 0x0f;  // CH0 L
-    sendbuf[7] = ch1 & 0x0f;  // CH1 L
+    sendbuf[6] = ch1 & 0x0f;  // CH1 L
+    sendbuf[7] = ch0 & 0x0f;  // CH0 L
     sendbuf[8] = 0;
     sendbuf[9] = ch2 & 0x0f;  // CH2 L
     sendbuf[10] = 0xf; //未調査
