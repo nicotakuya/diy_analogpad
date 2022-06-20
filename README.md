@@ -2,7 +2,7 @@
 
 ## overview
 
-XE-1AP互換品を作る試みです。
+XE-1APの互換品を作る試みです。
 
 メガドライブ版「アフターバーナーII」で動作を確認しています。
 
@@ -12,7 +12,7 @@ XE-1AP互換品を作る試みです。
 
 "diy_analogpad_schematics.png"を参照。
 
-## 主な部品リスト
+## parts list
 
 U1:Arduino Pro mini互換モジュール(ATmega328、5V動作、16MHz)
 https://akizukidenshi.com/catalog/g/gK-10347/
@@ -33,8 +33,8 @@ https://akizukidenshi.com/catalog/g/gP-12911/
 
 ## 作り方
 
-マイコン(ATmega328)にArduinoのブートローダーを書き込まれている必要があります。
-Arduino IDEを使ってプログラム(.ino)を書き込みます。
+Arduino IDEを使ってマイコンにプログラム(.ino)を書き込みます。
+
 メガドライブとアナログパッドを接続して電源を入れます。「アフターバーナーII」の場合、タイトル画面で「CONTROL ANALOG-JOY」と表示されたら、認識成功です。
 
 ＊Arduinoのブートローダで時間が取り過ぎて、認識に失敗している可能性があります。その場合、メガドライブのリセットボタンを押すと改善します。
