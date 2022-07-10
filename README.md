@@ -1,4 +1,4 @@
-# diy_analogpad
+# DIY Analog pad
 
 ## overview
 
@@ -58,3 +58,9 @@ Arduino IDEを使ってマイコンにプログラム(.ino)を書き込みます
 
 ## movie
 https://sites.google.com/site/yugenkaisyanico/diy-analogpad
+
+## 関連
+https://github.com/nicotakuya/diy_analogpad_ps
+
+https://github.com/nicotakuya/multiway-pad-converter
+
